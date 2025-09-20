@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traceability - Pacific Coral</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="traceability.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Pacific Coral</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about-us.html" class="nav-link">About Us</a>
+                <a href="index.html#sourcing" class="nav-link">Sourcing</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="traceability-page.html" class="nav-link active">Traceability</a>
+                <a href="responsibility.html" class="nav-link">Responsibility</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="traceability-hero">
+            <div class="hero-grid-background"></div>
+            <div class="hero-floating-elements"></div>
+            <div class="hero-content">
+                <div class="hero-badge" data-aos="fade-up">Complete Transparency</div>
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <span class="tech-text">Track Every</span>
+                    <span class="gradient-text">Journey</span>
+                </h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
+                    From ocean to table, follow your seafood's complete journey with our blockchain-powered traceability system
+                </p>
+                <div class="hero-search-container" data-aos="fade-up" data-aos-delay="600">
+                    <div class="search-box">
+                        <input type="text" id="trace-input" placeholder="Enter batch code, QR code, or product ID">
+                        <button class="search-btn" onclick="startTrace()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 21L16.657 16.657M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="qr-scanner-btn" onclick="simulateQRScan()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="3" width="8" height="8" stroke="currentColor" stroke-width="2"/>
+                            <rect x="13" y="3" width="8" height="8" stroke="currentColor" stroke-width="2"/>
+                            <rect x="3" y="13" width="8" height="8" stroke="currentColor" stroke-width="2"/>
+                            <rect x="13" y="13" width="8" height="8" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <span>Scan QR</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-time Tracking Display -->
+        <section class="tracking-display" id="tracking-section" style="display: none;">
+            <div class="container">
+                <div class="tracking-header" data-aos="fade-up">
+                    <h2>Live Tracking Results</h2>
+                    <div class="tracking-status">
+                        <div class="status-indicator active"></div>
+                        <span>Real-time Updates</span>
+                    </div>
+                </div>
+                
+                <div class="tracking-journey">
+                    <div class="journey-timeline">
+                        <div class="journey-step completed" data-step="1">
+                            <div class="step-icon">🌊</div>
+                            <div class="step-content">
+                                <h3>Ocean Harvest</h3>
+                                <p>Gulf of Mexico, USA</p>
+                                <div class="step-details">
+                                    <span class="detail-item">Coordinates: 28.7°N, 94.2°W</span>
+                                    <span class="detail-item">Date: March 15, 2024</span>
+                                    <span class="detail-item">Vessel: Pacific Dream</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-step completed" data-step="2">
+                            <div class="step-icon">🏭</div>
+                            <div class="step-content">
+                                <h3>Processing Facility</h3>
+                                <p>Louisiana Processing Center</p>
+                                <div class="step-details">
+                                    <span class="detail-item">Temperature: -2°C maintained</span>
+                                    <span class="detail-item">Quality Grade: A+</span>
+                                    <span class="detail-item">Batch: PC-24-0315</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-step in-progress" data-step="3">
+                            <div class="step-icon">🚛</div>
+                            <div class="step-content">
+                                <h3>Cold Chain Transport</h3>
+                                <p>En Route to Distribution</p>
+                                <div class="step-details">
+                                    <span class="detail-item">Current Temp: -1.8°C</span>
+                                    <span class="detail-item">ETA: 6 hours</span>
+                                    <span class="detail-item">Driver: John Martinez</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-step pending" data-step="4">
+                            <div class="step-icon">🏪</div>
+                            <div class="step-content">
+                                <h3>Retail Delivery</h3>
+                                <p>Final Destination</p>
+                                <div class="step-details">
+                                    <span class="detail-item">Estimated arrival</span>
+                                    <span class="detail-item">Quality verified</span>
+                                    <span class="detail-item">Ready for sale</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Trust & Verification -->
+        <section class="trust-verification">
+            <div class="verification-background"></div>
+            <div class="container">
+                <div class="trust-content" data-aos="fade-up">
+                    <h2>Verified Trust</h2>
+                    <p>Every step independently verified and certified</p>
+                </div>
+                
+                <div class="verification-badges">
+                    <div class="badge-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="badge-icon">🛡️</div>
+                        <h3>HACCP Verified</h3>
+                        <p>Food safety management system compliance</p>
+                    </div>
+                    
+                    <div class="badge-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="badge-icon">📊</div>
+                        <h3>Third-Party Audited</h3>
+                        <p>Independent verification by certified auditors</p>
+                    </div>
+                    
+                    <div class="badge-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="badge-icon">🔐</div>
+                        <h3>Encrypted Data</h3>
+                        <p>Military-grade encryption protects all records</p>
+                    </div>
+                    
+                    <div class="badge-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="badge-icon">⚡</div>
+                        <h3>Real-time Updates</h3>
+                        <p>Instant notifications for any status changes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CTA Section -->
+        <section class="traceability-cta">
+            <div class="cta-particle-system"></div>
+            <div class="container">
+                <div class="cta-content" data-aos="fade-up">
+                    <h2>Ready to Implement Traceability?</h2>
+                    <p>Join leading companies using our advanced tracking system</p>
+                    <div class="cta-buttons">
+                        <a href="index.html#contact" class="cta-button primary">Request Demo</a>
+                        <a href="products.html" class="cta-button secondary">View Products</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-simple">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Pacific Coral Seafood. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script src="traceability.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+</html>

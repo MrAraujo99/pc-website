@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coral - Pure Seafood</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Pacific Coral</div>
+            <div class="nav-links">
+                    <a href="#home" class="nav-link">Home</a>
+                <a href="about-us.html" class="nav-link">About Us</a>
+                <a href="#sourcing" class="nav-link">Sourcing</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="traceability-page.html" class="nav-link">Traceability</a>
+                <a href="responsibility.html" class="nav-link">Responsibility</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Clean Hero Section -->
+        <section class="hero-clean" id="home">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Premium Quality Seafood
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        For Restaurant & Retail Industry
+                    </p>
+                    
+                    <div class="hero-legacy">
+                        <span class="legacy-text">Family owned since 1974 • 3rd largest shrimp importer in USA</span>
+                    </div>
+                    
+                    <button class="hero-cta" onclick="scrollToSection('about')">
+                        Discover Our Story
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Story -->
+        <section class="story" id="about">
+            <div class="container">
+                <h2 data-aos="fade-up">The Azari Family Legacy</h2>
+                <div class="story-content">
+                    <div class="story-text" data-aos="fade-right">
+                        <p class="story-lead">Founded in 1974 by Michael Azari, an Israeli immigrant with Panamanian heritage, Coral has grown from a small Miami warehouse to America's 3rd largest shrimp importer.</p>
+                        <p>Today, brothers Jeff, Dan, and David Azari continue their father's vision, bringing millions of pounds of premium seafood from the world's finest fishing fleets and farmers to American tables.</p>
+                        <p>Our commitment to excellence spans 50 years, built on relationships with suppliers from the Gulf of Mexico to the Pacific Ocean, ensuring every product meets our family's uncompromising standards.</p>
+                    </div>
+                </div>
+                
+                <!-- Quality Standards - Stunning Card Deck -->
+                <div class="quality-integration" data-aos="fade-up" data-aos-delay="800">
+                    <h2>Uncompromising Quality Standards</h2>
+                    
+                    <div class="quality-card-deck" id="qualityCardDeck">
+                        <!-- HACCP Certified Card -->
+                        <div class="quality-deck-card" data-card="0">
+                            <div class="quality-card-content">
+                                <div class="quality-card-image">
+                                    <!-- Background image handled via CSS -->
+                                </div>
+                                
+                                <div class="quality-text-section">
+                                    <div class="quality-card-header">
+                                        <div class="quality-card-title">
+                                            <h3>HACCP Certified</h3>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="quality-card-description">
+                                        Complete temperature and cleanliness monitoring throughout the entire process from harvest to delivery
+                                    </div>
+                                    
+                                    <ul class="quality-card-features">
+                                        <li>Temperature controlled supply chain</li>
+                                        <li>Cleanliness verification protocols</li>
+                                        <li>Quality control at every stage</li>
+                                    </ul>
+                                    
+                                    <div class="quality-cert-logo">
+                                        <img src="images/haccp-certificate.avif" alt="HACCP Certificate">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- BAP Certified Card -->
+                        <div class="quality-deck-card" data-card="1">
+                            <div class="quality-card-content">
+                                <div class="quality-card-image">
+                                    <!-- Background image handled via CSS -->
+                                </div>
+                                
+                                <div class="quality-text-section">
+                                    <div class="quality-card-header">
+                                        <div class="quality-card-title">
+                                            <h3>BAP Certified</h3>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="quality-card-description">
+                                        Best Aquaculture Practices certification ensuring responsible sourcing and sustainability standards
+                                    </div>
+                                    
+                                    <ul class="quality-card-features">
+                                        <li>Global Aquaculture Alliance verified</li>
+                                        <li>Sustainable farming practices</li>
+                                        <li>Environmental responsibility</li>
+                                    </ul>
+                                    
+                                    <div class="quality-cert-logo">
+                                        <img src="images/bap-certification.png" alt="BAP Certification">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Premium Sourcing Card -->
+                        <div class="quality-deck-card" data-card="2">
+                            <div class="quality-card-content">
+                                <div class="quality-card-image">
+                                    <img src="images/dsc00443-premium-sourcing.jpg" alt="Premium seafood sourcing">
+                                </div>
+                                
+                                <div class="quality-text-section">
+                                    <div class="quality-card-header">
+                                        <div class="quality-card-title">
+                                            <h3>Premium Sourcing</h3>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="quality-card-description">
+                                        Direct relationships with the world's best fishing fleets and aquaculture farmers
+                                    </div>
+                                    
+                                    <ul class="quality-card-features">
+                                        <li>Vetted supplier network</li>
+                                        <li>Sustainable practices</li>
+                                        <li>Freshness guarantee</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Dots -->
+                    <div class="quality-deck-nav">
+                        <div class="quality-deck-dot active" data-card="0"></div>
+                        <div class="quality-deck-dot" data-card="1"></div>
+                        <div class="quality-deck-dot" data-card="2"></div>
+                    </div>
+                    
+                    <!-- Swipe Hint -->
+                    <div class="quality-swipe-hint">
+                        Click or swipe
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Sourcing Map -->
+        <section class="sourcing" id="sourcing">
+            <div class="container">
+                <h2 data-aos="fade-up">Global Sourcing Network</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">We source from the world's finest fishing fleets and farmers across 5+ countries</p>
+                
+                <div class="sourcing-content">
+                    <!-- CLEAN EARTH ANIMATION SEQUENCE -->
+                    <div class="earth-animation-container" data-aos="fade-up" data-aos-delay="400">
+                        <!-- Clickable Earth -->
+                        <div id="earth-clickable" class="earth-clickable">
+                            <img src="images/world-spinning.gif" alt="Spinning World" class="world-gif">
+                        </div>
+                        
+                        <!-- Welcome Message (Hidden) -->
+                        <div id="welcome-message" class="welcome-message" style="display: none;">
+                            <div class="welcome-line">
+                                <span class="letter">W</span><span class="letter">e</span><span class="letter">l</span><span class="letter">c</span><span class="letter">o</span><span class="letter">m</span><span class="letter">e</span><span class="space"> </span><span class="letter">t</span><span class="letter">o</span><span class="space"> </span><span class="letter">o</span><span class="letter">u</span><span class="letter">r</span><span class="space"> </span><span class="letter world-letter">W</span><span class="letter world-letter">o</span><span class="letter world-letter">r</span><span class="letter world-letter">l</span><span class="letter world-letter">d</span><span class="letter world-letter">!</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sourcing Map (Hidden) -->
+                        <div id="final-map" class="final-map" style="display: none;">
+                            <!-- Leaflet map will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <div class="sourcing-stats" data-aos="fade-left" data-aos-delay="600">
+                        <h3>Sourcing by Country</h3>
+                        <div class="country-stats" id="country-stats">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Showcase -->
+        <section class="products-showcase" id="products">
+            <div class="container">
+                <h2 data-aos="fade-up">Premium Product Selection</h2>
+                
+                <div class="product-tabs">
+                    <button class="tab-button active" data-category="shrimp">Premium Shrimp</button>
+                    <button class="tab-button" data-category="fish">Fresh Fish</button>
+                    <!-- FROZEN SPECIALTIES - Commented out in case we want it back -->
+                    <!-- <button class="tab-button" data-category="frozen">Frozen Specialties</button> -->
+                    <button class="tab-button" data-category="ethnic">Ethnic Foods</button>
+                </div>
+                
+                <div class="product-grid" id="product-grid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+                
+                <div class="product-highlights">
+                    <div class="highlight-card" data-aos="fade-up">
+                        <div class="highlight-icon">📊</div>
+                        <h4>Industry Leading</h4>
+                        <p>3rd largest shrimp importer in the USA with $600M annual import value</p>
+                    </div>
+                    <div class="highlight-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="highlight-icon">🌍</div>
+                        <h4>Global Reach</h4>
+                        <p>11,037+ import shipments from trusted suppliers worldwide</p>
+                    </div>
+                    <div class="highlight-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="highlight-icon">❄️</div>
+                        <h4>Cold Chain Excellence</h4>
+                        <p>Refrigerated containers with typical shipments of 18,000-24,000 kg</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Brands Section -->
+        <section class="our-brands" id="brands">
+            <div class="container">
+                <div class="brands-header" data-aos="fade-up">
+                    <h2>Our Brands</h2>
+                    <p>For 46 years we have committed ourselves to excellence and it is you, our customers, that have come to prefer our Premium Brands.</p>
+                </div>
+                
+                <div class="brands-showcase" data-aos="fade-up" data-aos-delay="300">
+                    <div class="brand-logos">
+                        <div class="brand-item" data-aos="zoom-in" data-aos-delay="100">
+                            <img src="images/hua-moa-logo.avif" alt="Hua Moa" class="brand-logo">
+                        </div>
+                        <div class="brand-item" data-aos="zoom-in" data-aos-delay="200">
+                            <img src="images/mua-moa-logo.avif" alt="Ocean Straits Premium Fish" class="brand-logo ocean-straits">
+                        </div>
+                        <div class="brand-item" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="brand-text preference">Preference</div>
+                            <div class="brand-subtitle">Premium</div>
+                        </div>
+                        <div class="brand-item" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="brand-text pacific-straits">Pacific Straits</div>
+                            <div class="brand-subtitle blue">Premium Fish</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trace Your Lot Section -->
+
+        <!-- Contact & Locations -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2 data-aos="fade-up">Connect With Us</h2>
+                
+                <div class="contact-content">
+                    <div class="contact-form-container" data-aos="fade-right">
+                        <h3>Get In Touch</h3>
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="company" name="company" placeholder="Company Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+                            </div>
+                            <div class="form-group">
+                                <select id="inquiry" name="inquiry" required>
+                                    <option value="">Select Inquiry Type</option>
+                                    <option value="pricing">Pricing Request</option>
+                                    <option value="samples">Product Samples</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                    <option value="general">General Question</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Tell us about your seafood needs..." rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="submit-button">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <div class="locations-container" data-aos="fade-left">
+                        <div class="location-card">
+                            <h4>Miami Headquarters</h4>
+                            <div class="location-details">
+                                <p><strong>📍</strong> 4770 Biscayne Blvd, Suite 700<br>Miami, FL 33137</p>
+                                <p><strong>📞</strong> (305) 573-8280</p>
+                                <p><strong>✉️</strong> miami@coral-seafood.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-card">
+                            <h4>Tampa Office</h4>
+                            <div class="location-details">
+                                <p><strong>📍</strong> 5121 Ehrlich Road, Suite 103B<br>Tampa, FL 33624</p>
+                                <p><strong>📞</strong> (813) 555-0123</p>
+                                <p><strong>✉️</strong> tampa@coral-seafood.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="business-hours">
+                            <h4>Business Hours</h4>
+                            <div class="hours">
+                                <div class="hour-item">
+                                    <span>Monday - Friday</span>
+                                    <span>8:00 AM - 6:00 PM</span>
+                                </div>
+                                <div class="hour-item">
+                                    <span>Saturday</span>
+                                    <span>9:00 AM - 2:00 PM</span>
+                                </div>
+                                <div class="hour-item">
+                                    <span>Sunday</span>
+                                    <span>Closed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-simple">
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Coral Seafood. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle for better visibility -->
+  <circle cx="100" cy="100" r="95" fill="rgba(255, 107, 71, 0.1)" stroke="rgba(255, 107, 71, 0.3)" stroke-width="2"/>
+  
+  <!-- Mouse body - thicker and more prominent -->
+  <rect x="70" y="35" width="60" height="100" rx="30" ry="30" fill="white" stroke="#ff6b47" stroke-width="8"/>
+  
+  <!-- Mouse dot (scroll wheel indicator) - larger and colored -->
+  <circle cx="100" cy="65" r="6" fill="#ff6b47"/>
+  
+  <!-- First chevron - thicker and colored -->
+  <path d="M 80 145 L 100 165 L 120 145" fill="none" stroke="#ff6b47" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Second chevron - thicker and colored -->
+  <path d="M 80 165 L 100 185 L 120 165" fill="none" stroke="#ff6b47" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

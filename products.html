@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Products - Pacific Coral</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="products.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Pacific Coral</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about-us.html" class="nav-link">About Us</a>
+                <a href="index.html#sourcing" class="nav-link">Sourcing</a>
+                <a href="products.html" class="nav-link active">Products</a>
+                <a href="traceability-page.html" class="nav-link">Traceability</a>
+                <a href="responsibility.html" class="nav-link">Responsibility</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="products-hero">
+            <div class="hero-background">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-waves"></div>
+            <div class="hero-content">
+                <div class="hero-badge" data-aos="fade-up">Premium Quality</div>
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <span class="title-gradient">Ocean to Table</span>
+                    <span class="title-line">Excellence</span>
+                </h1>
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="hero-stat">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Premium Products</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Cold Chain</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll-indicator" data-aos="fade-up" data-aos-delay="600">
+                <div class="scroll-line"></div>
+                <span>Explore Products</span>
+            </div>
+        </section>
+
+        <!-- Featured Product Spotlight -->
+        <section class="product-spotlight" id="product-spotlight">
+            <div class="container">
+                <div class="spotlight-content">
+                    <div class="spotlight-info" data-aos="fade-right">
+                        <div class="spotlight-badge">Featured Product</div>
+                        <h2 class="spotlight-title">Wild Gulf Shrimp</h2>
+                        <p class="spotlight-description">
+                            Our signature Wild Gulf Shrimp represents the pinnacle of American seafood excellence. Harvested from the pristine waters of the Gulf of Mexico, each shrimp is carefully selected for its sweet flavor and firm texture.
+                        </p>
+                        <div class="spotlight-features">
+                        </div>
+                        <button class="spotlight-cta">Learn More</button>
+                    </div>
+                    <div class="spotlight-visual" data-aos="fade-left">
+                        <div class="spotlight-image-container">
+                            <img src="images/wild-gulf-shrimp.webp" alt="Wild Gulf Shrimp" class="spotlight-image">
+                            <div class="image-glow"></div>
+                            <div class="stp-logo-badge">
+                                <img src="images/stp-logo.avif" alt="STP Logo" class="stp-logo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Selection Header -->
+        <section class="premium-selection-header">
+            <div class="container">
+                <div class="premium-header-content" data-aos="fade-up">
+                    <h2 class="premium-title">Premium Selection</h2>
+                    <p class="premium-subtitle">Every product in our collection meets our uncompromising standards for quality, freshness, and sustainability.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Categories Navigation -->
+        <section class="product-navigation">
+            <div class="container">
+                <div class="nav-tabs" data-aos="fade-up">
+                    <button class="nav-tab active" data-category="shrimp" data-aos="fade-up" data-aos-delay="100">
+                        <span>Premium Shrimp</span>
+                    </button>
+                    <button class="nav-tab" data-category="fish" data-aos="fade-up" data-aos-delay="200">
+                        <span>Fresh Fish</span>
+                    </button>
+                    <button class="nav-tab" data-category="ethnic" data-aos="fade-up" data-aos-delay="300">
+                        <span>Ethnic Foods</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase -->
+        <section class="product-showcase">
+            <div class="container">
+                <!-- MEGA INTERACTIVE PRODUCT SHOWCASE -->
+                <div class="mega-product-showcase" id="mega-showcase">
+                    <!-- Background Images -->
+                    <div class="mega-background" id="mega-bg"></div>
+                    
+                    <!-- Content Overlay -->
+                    <div class="mega-content">
+                        <div class="mega-info" id="mega-info">
+                            <div class="mega-category">Premium Shrimp</div>
+                            <h2 class="mega-title" id="mega-title">Wild Gulf Shrimp</h2>
+                            <p class="mega-description" id="mega-description">Fresh from the Gulf of Mexico waters, delivering exceptional taste and quality</p>
+                            
+                            <div class="mega-features" id="mega-features">
+                                <div class="feature-tag">16-30 count/lb</div>
+                                <div class="feature-tag">IQF Frozen</div>
+                                <div class="feature-tag">Chemical-free</div>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA Button -->
+                        <button class="mega-cta" id="mega-cta">See More</button>
+                        
+                        <!-- Quality Stamp -->
+                        <div class="mega-stamp">
+                            <img src="images/stp-stamp.avif" alt="STP Free" />
+                        </div>
+                        
+                        <!-- Ethnic Food Logo Overlays -->
+                        <div class="mega-logo-overlay mega-logo-left" id="mega-logo-left">
+                            <img src="images/hua-moa-logo.avif" alt="Hua Moa Logo" />
+                        </div>
+                        <div class="mega-logo-overlay mega-logo-right" id="mega-logo-right">
+                            <img src="images/mua-moa-logo.avif" alt="Mua Moa Logo" />
+                        </div>
+                    </div>
+                    
+                    <!-- Product Navigation -->
+                    <div class="mega-nav">
+                        <button class="mega-nav-btn active" data-product="0">
+                            <span class="nav-label">Wild Gulf</span>
+                        </button>
+                        <button class="mega-nav-btn" data-product="1">
+                            <span class="nav-label">Ecuadorian</span>
+                        </button>
+                        <button class="mega-nav-btn" data-product="2">
+                            <span class="nav-label">Tiger Prawns</span>
+                        </button>
+                        <button class="mega-nav-btn" data-product="3">
+                            <span class="nav-label">Rock Shrimp</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Progress Indicator -->
+                    <div class="mega-progress">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button class="mega-arrow mega-arrow-left" id="mega-arrow-left">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="mega-arrow mega-arrow-right" id="mega-arrow-right">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Standards -->
+        <section class="product-standards">
+            <div class="container">
+                <div class="standards-header" data-aos="fade-up">
+                    <h2>Our Quality Promise</h2>
+                    <p>Every product undergoes rigorous testing and quality control</p>
+                </div>
+                
+                <div class="standards-grid">
+                    <div class="standard-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="standard-icon">
+                            <img src="images/haccp-certificate.avif" alt="HACCP" class="standard-image">
+                        </div>
+                        <h3>HACCP Certified</h3>
+                        <p>Complete temperature and cleanliness monitoring throughout the entire supply chain</p>
+                    </div>
+                    
+                    <div class="standard-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="standard-icon">
+                            <img src="images/bap-certification.png" alt="BAP Certified" class="standard-image">
+                        </div>
+                        <h3>BAP Certified</h3>
+                        <p>Best Aquaculture Practices certification ensuring responsible sourcing</p>
+                    </div>
+                    
+                    <div class="standard-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="standard-icon">❄️</div>
+                        <h3>Flash Frozen</h3>
+                        <p>Advanced freezing technology preserves peak freshness and nutritional value</p>
+                    </div>
+                    
+                </div>
+                
+                <!-- Navigation Dots -->
+                <div class="quality-deck-nav">
+                    <div class="quality-deck-dot active" data-card="0"></div>
+                    <div class="quality-deck-dot" data-card="1"></div>
+                    <div class="quality-deck-dot" data-card="2"></div>
+                </div>
+                
+                <!-- Swipe Hint - Absolutely Centered -->
+                <div class="quality-swipe-hint centered-swipe-hint">
+                    Click or swipe
+                </div>
+            </div>
+        </section>
+
+        <!-- Supply Chain Excellence -->
+        <section class="supply-chain">
+            <div class="supply-waves"></div>
+            <div class="container">
+                <div class="chain-header" data-aos="fade-up">
+                    <h2>From the Ocean to Your Table</h2>
+                    <p>Our vertically integrated supply chain ensures unmatched quality and traceability</p>
+                </div>
+                
+                <div class="chain-steps">
+                    <div class="chain-step" data-aos="fade-up" data-aos-delay="100">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>Sourcing</h3>
+                            <p>Direct partnerships with premium suppliers worldwide</p>
+                        </div>
+                    </div>
+                    <div class="chain-arrow">→</div>
+                    
+                    <div class="chain-step" data-aos="fade-up" data-aos-delay="200">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>Processing</h3>
+                            <p>State-of-the-art facilities with strict quality controls</p>
+                        </div>
+                    </div>
+                    <div class="chain-arrow">→</div>
+                    
+                    <div class="chain-step" data-aos="fade-up" data-aos-delay="300">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>Distribution</h3>
+                            <p>Temperature-controlled logistics nationwide</p>
+                        </div>
+                    </div>
+                    <div class="chain-arrow">→</div>
+                    
+                    <div class="chain-step" data-aos="fade-up" data-aos-delay="400">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3>Delivery</h3>
+                            <p>Fresh to your kitchen, guaranteed quality</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="products-cta">
+            <div class="container">
+                <div class="cta-content" data-aos="fade-up">
+                    <h2>Ready to Experience Premium Quality?</h2>
+                    <p>Join thousands of restaurants and retailers who trust Pacific Coral for their seafood needs.</p>
+                    <div class="cta-buttons">
+                        <a href="index.html#contact" class="cta-button primary">Request Samples</a>
+                        <a href="traceability-page.html" class="cta-button secondary">Learn About Traceability</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-simple">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Pacific Coral Seafood. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Ultra-Smooth 60FPS Wave Mouse Interaction
+        function initializeWaveInteraction() {
+            const heroSection = document.querySelector('.products-hero');
+            const waves = document.querySelector('.hero-waves');
+            
+            if (!heroSection || !waves) return;
+            
+            let mouseX = 50;
+            let mouseY = 50;
+            let targetX = 50;
+            let targetY = 50;
+            
+            // Smooth mouse tracking with 60FPS animation
+            function updateWaves() {
+                // Smooth interpolation for butter-smooth motion
+                mouseX += (targetX - mouseX) * 0.1;
+                mouseY += (targetY - mouseY) * 0.1;
+                
+                // Update CSS custom properties for wave positioning
+                heroSection.style.setProperty('--mouse-x', mouseX + '%');
+                heroSection.style.setProperty('--mouse-y', mouseY + '%');
+                
+                // Continue the animation loop
+                requestAnimationFrame(updateWaves);
+            }
+            
+            // Mouse move event with debouncing
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                targetX = ((e.clientX - rect.left) / rect.width) * 100;
+                targetY = ((e.clientY - rect.top) / rect.height) * 100;
+            });
+            
+            // Mouse leave - return to center
+            heroSection.addEventListener('mouseleave', () => {
+                targetX = 50;
+                targetY = 50;
+            });
+            
+            // Start the animation loop
+            updateWaves();
+        }
+
+
+        // Initialize products page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeProductsPage();
+            initializeWaveInteraction();
+        });
+    </script>
+</body>
+</html>
