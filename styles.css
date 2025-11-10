@@ -23,11 +23,13 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 80, 120, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     z-index: 1000;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 #navbar.scrolled {
@@ -59,8 +61,9 @@ body {
 }
 
 #navbar.theme-dark {
-    background-color: rgba(30, 60, 114, 0.95) !important;
+    background-color: rgba(74, 124, 143, 0.95) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 #navbar.theme-dark .logo,
@@ -108,6 +111,16 @@ body {
     color: white !important;
 }
 
+#navbar.theme-transparent {
+    background-color: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#navbar.theme-transparent .logo,
+#navbar.theme-transparent .nav-link {
+    color: white !important;
+}
+
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -115,7 +128,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 0 2rem;
-    height: 70px;
+    height: 55px;
     position: relative;
 }
 
@@ -123,11 +136,14 @@ body {
     position: absolute;
     left: 2rem;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     color: #ffffff;
     text-decoration: none;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: floatWave 3s ease-in-out infinite;
+    animation-delay: 0.3s;
 }
 
 .nav-links {
@@ -143,10 +159,32 @@ body {
     font-size: 0.95rem;
     transition: all 0.3s ease;
     position: relative;
+    display: inline-block;
+    animation: floatWave 3s ease-in-out infinite;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link:nth-child(1) { animation-delay: 0s; }
+.nav-link:nth-child(2) { animation-delay: 0.2s; }
+.nav-link:nth-child(3) { animation-delay: 0.4s; }
+.nav-link:nth-child(4) { animation-delay: 0.6s; }
+.nav-link:nth-child(5) { animation-delay: 0.8s; }
+.nav-link:nth-child(6) { animation-delay: 1s; }
+.nav-link:nth-child(7) { animation-delay: 1.2s; }
+
+@keyframes floatWave {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
 }
 
 .nav-link:hover {
     color: #FF6B6B;
+    transform: translateY(-6px) !important;
+    text-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
 }
 
 .nav-link::after {
@@ -169,14 +207,31 @@ body {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
 
 .mobile-menu-toggle span {
     width: 25px;
     height: 3px;
-    background-color: #1d1d1f;
+    background-color: #ffffff;
     margin: 3px 0;
     transition: 0.3s;
+    pointer-events: none;
+}
+
+/* Hamburger color on light backgrounds */
+#navbar.scrolled .mobile-menu-toggle span,
+#navbar.theme-light .mobile-menu-toggle span {
+    background-color: #1d1d1f;
+}
+
+/* Hamburger color on dark backgrounds */
+#navbar.theme-dark .mobile-menu-toggle span,
+#navbar.theme-coral .mobile-menu-toggle span {
+    background-color: #ffffff;
 }
 
 /* Hero Section */
@@ -272,11 +327,61 @@ body {
     box-shadow: 0 8px 30px rgba(255, 107, 107, 0.4);
 }
 
+/* Hero Video Background Styles */
+.hero-video-section {
+    background: #000000;
+}
+
+.hero-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    object-fit: cover;
+    transition: opacity 0.8s ease-in-out;
+
+    /* Enhanced rendering quality */
+    image-rendering: auto;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+}
+
+.hero-background-video.fade-transition {
+    opacity: 0.7;
+}
+
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1;
+}
+
+.hero-video-section .hero-container {
+    z-index: 2;
+}
+
+.hero-video-section .hero-title,
+.hero-video-section .hero-subtitle {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
 /* Simple Animation */
 @keyframes fadeInUp {
-    0% { 
-        opacity: 0; 
-        transform: translateY(30px); 
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
     }
     100% { 
         opacity: 1; 
@@ -414,13 +519,67 @@ body {
     
     /* Navigation mobile */
     .nav-links {
-        display: none;
+        position: fixed;
+        top: 55px;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #4a7c8f 0%, #5a8fa3 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        gap: 0;
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+        z-index: 999;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        animation: none;
     }
-    
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-link {
+        padding: 1.2rem 2rem;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #ffffff !important;
+        animation: none !important;
+        transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        padding-left: 2.5rem;
+    }
+
     .mobile-menu-toggle {
-        display: flex;
+        display: flex !important;
+        z-index: 10000 !important;
+        position: relative;
+        cursor: pointer !important;
+        pointer-events: auto !important;
     }
-    
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
     .logo {
         left: 1rem;
         font-size: 1.6rem;
@@ -1097,6 +1256,12 @@ h2 {
 /* Story Section */
 .story {
     background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    padding: 80px 0 0 0;
+}
+
+.story h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .story-content {
@@ -1104,28 +1269,31 @@ h2 {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 1000px;
+    justify-content: center;
+    max-width: 900px;
     margin: 0 auto;
+    min-height: 100vh;
+    padding: 4rem 2rem;
 }
 
 .story-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.6;
     text-align: center;
-    max-width: 800px;
+    max-width: 750px;
     margin: 0 auto;
 }
 
 .story-lead {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: #1d1d1f;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .story-text p {
     color: #666;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .heritage-badges {
@@ -1217,14 +1385,34 @@ h2 {
 
 /* Sourcing Section */
 .sourcing {
-    background-color: #ffffff;
+    background-color: #4a7c8f;
+    padding: 3rem 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.sourcing h2 {
+    color: #ffffff;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.sourcing .section-subtitle {
+    color: #ffffff;
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+.sourcing h3 {
+    color: #ffffff;
 }
 
 .sourcing-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 4rem;
-    align-items: start;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 2.5rem;
+    align-items: stretch;
 }
 
 .map-container {
@@ -1237,21 +1425,21 @@ h2 {
 
 #awesome-sourcing-map {
     width: 100%;
-    height: 500px;
+    height: 450px;
 }
 
-/* CLEAN EARTH ANIMATION SEQUENCE */
-.earth-animation-container {
+/* WELCOME MESSAGE AND MAP SEQUENCE */
+.sourcing-animation-container {
     position: relative;
     width: 100%;
-    height: 600px;
-    background: white; /* Match the earth GIF's natural white background */
+    height: 500px;
+    background: #4a7c8f;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
-.earth-clickable {
+/* .earth-clickable {
     position: absolute;
     top: 0;
     left: 0;
@@ -1262,43 +1450,43 @@ h2 {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: white; /* Match the container and earth GIF background */
-}
+    background: white;
+} */
 
-.earth-clickable:hover {
+/* .earth-clickable:hover {
     transform: scale(1.02);
-}
+} */
 
-.world-gif {
+/* .world-gif {
     width: 300px;
     height: 300px;
     object-fit: contain;
-    background: transparent; /* Let the natural background show */
-}
+    background: transparent;
+} */
 
-/* Earth Zoom Animation */
+/* Earth Zoom Animation - DISABLED
 .earth-clickable.zooming .world-gif {
     animation: earthZoom 2s ease-in-out forwards;
 }
 
 .earth-clickable.zooming {
-    background: white !important; /* Ensure container background stays white */
-}
+    background: white !important;
+} */
 
-@keyframes earthZoom {
-    0% { 
+/* @keyframes earthZoom {
+    0% {
         transform: scale(1) rotate(0deg);
         opacity: 1;
     }
-    50% { 
+    50% {
         transform: scale(2) rotate(180deg);
         opacity: 0.8;
     }
-    100% { 
+    100% {
         transform: scale(4) rotate(360deg);
         opacity: 0;
     }
-}
+} */
 
 /* Welcome Message - Letter by Letter in One Line */
 .welcome-message {
@@ -1376,15 +1564,16 @@ h2 {
 }
 
 @keyframes mapFadeIn {
-    0% { 
-        opacity: 0; 
+    0% {
+        opacity: 0;
         transform: scale(0.95);
     }
-    100% { 
-        opacity: 1; 
+    100% {
+        opacity: 1;
         transform: scale(1);
     }
 }
+
 
 .world-transition-container {
     position: relative;
@@ -1750,26 +1939,29 @@ h2 {
 }
 
 .sourcing-stats {
-    background: white;
+    background: #2d5f73;
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    height: 500px;
+    display: flex;
+    flex-direction: column;
 }
 
 .sourcing-stats h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: #1d1d1f;
+    margin-bottom: 1rem;
+    color: #ffffff;
 }
 
 .country-stat {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    background: #ffffff;
+    margin-bottom: 0.7rem;
+    padding: 0.6rem;
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 8px;
 }
 
@@ -1778,6 +1970,7 @@ h2 {
     align-items: center;
     gap: 0.5rem;
     font-weight: 500;
+    color: #ffffff;
 }
 
 .country-percentage {
@@ -1891,6 +2084,7 @@ h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(1.15);
 }
 
 .logo-overlay {
@@ -2194,10 +2388,14 @@ div.sourcing-link:hover {
 
 /* Quality Section - Clean Card Deck */
 .quality-integration {
-    padding: 8rem 0;
+    padding: 3rem 0;
     background: transparent;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @keyframes backgroundFloat {
@@ -2207,10 +2405,10 @@ div.sourcing-link:hover {
 
 .quality-integration h2 {
     text-align: center;
-    font-size: 3.5rem;
+    font-size: 2.2rem;
     font-weight: 800;
     color: #333;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
     letter-spacing: -0.02em;
     text-shadow: none;
     position: relative;
@@ -2221,8 +2419,8 @@ div.sourcing-link:hover {
 .quality-card-deck {
     position: relative;
     width: 100%;
-    height: 600px;
-    max-width: 850px;
+    height: 500px;
+    max-width: 800px;
     margin: 0 auto;
     perspective: 1200px;
     z-index: 5;
@@ -2278,6 +2476,7 @@ div.sourcing-link:hover {
     background: url('images/dsc00140-haccp.jpg');
     background-size: cover;
     background-position: center;
+    filter: brightness(1.2);
 }
 
 .quality-deck-card[data-card="0"] .quality-card-image::before {
@@ -2294,14 +2493,15 @@ div.sourcing-link:hover {
 .quality-deck-card[data-card="0"] .quality-text-section {
     width: 100%;
     height: 50%;
-    padding: 2.5rem;
+    padding: 2rem 2.5rem 2rem 2.5rem;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     border-radius: 0 0 25px 25px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
+    z-index: 2;
 }
 
 .quality-deck-card[data-card="0"] .quality-text-section::before {
@@ -2342,6 +2542,7 @@ div.sourcing-link:hover {
     background: url('images/dsc09847-bap.jpg');
     background-size: cover;
     background-position: center;
+    filter: brightness(1.2);
 }
 
 .quality-deck-card[data-card="1"] .quality-card-image::before {
@@ -2358,14 +2559,15 @@ div.sourcing-link:hover {
 .quality-deck-card[data-card="1"] .quality-text-section {
     width: 100%;
     height: 50%;
-    padding: 2.5rem;
+    padding: 2rem 2.5rem 2rem 2.5rem;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     border-radius: 0 0 25px 25px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
+    z-index: 2;
 }
 
 .quality-deck-card[data-card="1"] .quality-text-section::before {
@@ -2449,19 +2651,21 @@ div.sourcing-link:hover {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    filter: brightness(1.2);
 }
 
 .quality-deck-card[data-card="2"] .quality-text-section {
     width: 100%;
     height: 50%;
-    padding: 2.5rem;
+    padding: 2rem 2.5rem 2rem 2.5rem;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     border-radius: 0 0 25px 25px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
+    z-index: 2;
 }
 
 .quality-deck-card[data-card="2"] .quality-text-section::before {
@@ -2538,7 +2742,7 @@ div.sourcing-link:hover {
 .quality-card-header {
     display: flex;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 0.6rem;
 }
 
 .quality-cert-logo {
@@ -2572,10 +2776,10 @@ div.sourcing-link:hover {
 }
 
 .quality-card-title h3 {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #1d1d1f;
-    margin: 0;
+    margin: 0 0 0.6rem 0;
     letter-spacing: -0.01em;
 }
 
@@ -2605,10 +2809,10 @@ div.sourcing-link:hover {
 }
 
 .quality-card-description {
-    font-size: 1.1rem;
+    font-size: 0.85rem;
     color: #666;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
 }
 
 .quality-card-features {
@@ -2618,12 +2822,13 @@ div.sourcing-link:hover {
 }
 
 .quality-card-features li {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #666;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.3rem;
     padding-left: 1.5rem;
     position: relative;
     transition: all 0.3s ease;
+    line-height: 1.3;
 }
 
 .quality-card-features li::before {
@@ -3033,44 +3238,53 @@ div.sourcing-link:hover {
 /* Contact Section */
 .contact {
     background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    padding: 2.5rem 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.contact h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 4rem;
+    gap: 2rem;
+    margin-bottom: 0;
 }
 
 .contact-form-container,
 .locations-container {
     background: white;
-    padding: 2.5rem;
+    padding: 1.5rem;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-form-container h3,
 .location-card h4 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     color: #1d1d1f;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
     width: 100%;
-    padding: 1rem;
+    padding: 0.7rem;
     border: 2px solid #f0f0f0;
     border-radius: 8px;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
 }
 
@@ -3086,10 +3300,10 @@ div.sourcing-link:hover {
     width: 100%;
     background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
     color: white;
-    padding: 1rem;
+    padding: 0.8rem;
     border: none;
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -3104,33 +3318,40 @@ div.sourcing-link:hover {
 }
 
 .location-card {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
     background: #ffffff;
     border-radius: 10px;
 }
 
 .location-details p {
     color: #666;
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+    font-size: 0.9rem;
 }
 
 .business-hours {
-    padding: 1.5rem;
+    padding: 1rem;
     background: #ffffff;
     border-radius: 10px;
 }
 
+.business-hours h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.7rem;
+}
+
 .hours {
-    space-y: 0.5rem;
+    space-y: 0.3rem;
 }
 
 .hour-item {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;
+    padding: 0.3rem 0;
     color: #666;
+    font-size: 0.9rem;
 }
 
 .hour-item span:first-child {
@@ -3140,30 +3361,33 @@ div.sourcing-link:hover {
 
 /* Our Brands Section */
 .our-brands {
-    padding: 8rem 0;
+    padding: 2.5rem 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .brands-header {
     text-align: center;
-    margin-bottom: 6rem;
+    margin-bottom: 3rem;
 }
 
 .brands-header h2 {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: #1d1d1f;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     letter-spacing: -0.02em;
 }
 
 .brands-header p {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: #666;
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .brands-showcase {
@@ -3175,7 +3399,7 @@ div.sourcing-link:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
+    gap: 2.5rem;
     flex-wrap: wrap;
 }
 
@@ -3184,13 +3408,13 @@ div.sourcing-link:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1.5rem;
     background: white;
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    min-height: 150px;
-    min-width: 200px;
+    min-height: 120px;
+    min-width: 180px;
     position: relative;
     overflow: hidden;
 }
@@ -4860,4 +5084,109 @@ footer {
     background: rgba(255, 107, 71, 0.8) !important;
     color: white !important;
     transform: scale(1.1) !important;
+}
+/* Mobile Touch Hint for Map */
+.map-touch-hint {
+    display: none;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    z-index: 1000;
+    pointer-events: none;
+    align-items: center;
+    gap: 8px;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+.map-touch-hint svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Show only on touch devices (iPad/iPhone) */
+@media (hover: none) and (pointer: coarse) {
+    .map-touch-hint {
+        display: flex;
+    }
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
+}
+
+/* Professional Minimalist Pin Marker */
+.custom-pin-marker {
+    background: transparent !important;
+    border: none !important;
+}
+
+.pin-marker {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    background: #ff6b47;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pin-marker:hover {
+    transform: scale(1.3);
+    box-shadow: 0 3px 12px rgba(255, 107, 71, 0.6);
+    border-width: 4px;
+}
+
+/* Apple-Style Navigation Arrows */
+.quality-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.quality-arrow:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.quality-arrow svg {
+    color: #333;
+}
+
+.quality-arrow-left {
+    left: 180px;
+}
+
+.quality-arrow-right {
+    right: 180px;
+}
+
+@media (max-width: 900px) {
+    .quality-arrow-left {
+        left: 10px;
+    }
+    .quality-arrow-right {
+        right: 10px;
+    }
 }

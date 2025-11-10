@@ -180,35 +180,35 @@ const products = {
     ],
     fish: [
         {
-            icon: 'images/mahi-mahi-new.jpg',
+            icon: 'images/mahi-mahi-fresh.jpg',
             isImage: true,
             name: 'Mahi Mahi',
             description: 'Firm, flaky white fish with mild flavor',
             details: ['Pacific and Atlantic varieties', 'Skinless fillets available', '4-6 oz and 6-8 oz portions', 'Fresh and frozen options']
         },
         {
-            icon: 'images/red-snapper.webp',
+            icon: 'images/red-snapper-fresh.jpg',
             isImage: true,
             name: 'Red Snapper',
             description: 'Premium whole fish and fillets',
             details: ['Gulf of Mexico sourced', 'Whole fish 2-8 lbs', 'Skin-on fillets', 'Sashimi grade available']
         },
         {
-            icon: 'images/tuna-correct.webp',
+            icon: 'images/tuna-fresh.jpg',
             isImage: true,
             name: 'Yellowfin Tuna',
             description: 'Sushi-grade quality, fresh and frozen',
             details: ['Sashimi grade #1', 'Loins and steaks', 'CO treated options', 'Pole and line caught']
         },
         {
-            icon: 'images/trout-background.avif',
+            icon: 'images/trout-fresh.jpg',
             isImage: true,
             name: 'Trout',
             description: 'Premium freshwater trout, sustainably farmed',
             details: ['Lake Titicaca sourced', 'Fresh and frozen options', 'Whole fish and fillets', 'Clean, mild flavor']
         },
         {
-            icon: 'images/grouper-new.jpg',
+            icon: 'images/grouper-fresh.jpg',
             isImage: true,
             name: 'Grouper',
             description: 'Firm texture, perfect for various preparations',
@@ -365,13 +365,16 @@ const companyLocations = [
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 DOM Content Loaded - starting ALL initialization...');
-    
+
+    // PRIORITY: Initialize mobile menu FIRST
+    initializeMobileMenu();
+
     // Initialize premium particle system
     if (document.getElementById('particles')) {
         particleSystem = new ParticleSystem();
         console.log('✨ Premium particle system initialized');
     }
-    
+
     // Core functionality
     initializeNavigation();
     initializeAnimations();
@@ -380,18 +383,18 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeMaps();
     initializeContactForm();
     initializeScrollEffects();
-    
+
     // Advanced features
     if (window.innerWidth > 768) {
         initializeCustomCursor();
     }
-    
+
     initializeLazyLoading();
     initializeSearch();
-    
+
     console.log('🌍 About to call initializeWorldTransition...');
     initializeWorldTransition();
-    
+
     // Add Enter key support for trace input
     const lotInput = document.getElementById('lot-code');
     if (lotInput) {
@@ -401,9 +404,48 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     console.log('✅ ALL initialization functions completed');
 });
+
+// SUPER SIMPLE mobile menu - just make it work!
+function initializeMobileMenu() {
+    console.log('📱 Starting mobile menu init...');
+
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const menu = document.querySelector('.nav-links');
+
+    if (!toggle || !menu) {
+        console.error('❌ Elements missing!');
+        return;
+    }
+
+    console.log('✅ Elements found!');
+
+    // Toggle menu open/close
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        console.log('🔄 Toggle clicked!');
+        menu.classList.toggle('active');
+        toggle.classList.toggle('active');
+    });
+
+    // CRITICAL: Don't stop link clicks from working!
+    // Just close the menu, let the link do its thing
+    const allLinks = menu.querySelectorAll('a');
+    allLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            console.log('🔗 Link clicked:', link.getAttribute('href'));
+            // Just close menu, DON'T prevent default!
+            setTimeout(function() {
+                menu.classList.remove('active');
+                toggle.classList.remove('active');
+            }, 100);
+        });
+    });
+
+    console.log('✅ Mobile menu ready!');
+}
 
 /* ===================================
  * NAVIGATION & UI FUNCTIONALITY
@@ -418,27 +460,28 @@ function initializeNavigation() {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
-            
+
             // Only prevent default for internal anchor links (starting with #)
-            if (targetId.startsWith('#')) {
+            if (targetId && targetId.startsWith('#')) {
                 e.preventDefault();
                 const targetSection = document.querySelector(targetId);
-                
+
                 if (targetSection) {
                     const navHeight = navbar.offsetHeight;
                     const targetPosition = targetSection.offsetTop - navHeight;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
-                    
+
                     // Update active nav link
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
                 }
             }
-            // For external links (like responsibility.html), allow default behavior
+            // For external links (like about-us.html, responsibility.html), allow default behavior
+            // The link will navigate naturally
         });
     });
     
@@ -453,14 +496,9 @@ function initializeNavigation() {
         // Update active nav link based on scroll position
         updateActiveNavLink();
     });
-    
-    // Mobile menu toggle
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const navLinksContainer = document.querySelector('.nav-links');
-    
-    mobileToggle.addEventListener('click', () => {
-        navLinksContainer.classList.toggle('active');
-    });
+
+    // Mobile menu initialization is now handled by initializeMobileMenu() function
+    // which is called first in DOMContentLoaded
 }
 
 // Update active navigation link based on scroll position
@@ -2133,28 +2171,28 @@ function initializeMegaShowcase() {
             {
                 name: 'Yellowfin Tuna',
                 description: 'Sushi-grade quality, fresh and frozen from pristine Pacific waters',
-                image: 'images/tuna-correct.webp',
+                image: 'images/tuna-fresh.jpg',
                 features: ['Sashimi grade #1', 'Pole and line caught', 'CO treated options'],
                 category: 'Fresh Fish'
             },
             {
                 name: 'Mahi Mahi',
                 description: 'Firm, flaky white fish with mild flavor, perfect for grilling',
-                image: 'images/mahi-mahi-new.jpg',
+                image: 'images/mahi-mahi-fresh.jpg',
                 features: ['Pacific varieties', '4-6 oz portions', 'Fresh and frozen'],
                 category: 'Fresh Fish'
             },
             {
                 name: 'Red Snapper',
                 description: 'Premium whole fish and fillets from Gulf of Mexico waters',
-                image: 'images/red-snapper.webp',
+                image: 'images/red-snapper-fresh.jpg',
                 features: ['Gulf sourced', 'Whole fish 2-8 lbs', 'Sashimi grade'],
                 category: 'Fresh Fish'
             },
             {
                 name: 'Grouper',
                 description: 'Firm texture fish, perfect for blackening or grilling',
-                image: 'images/grouper-new.jpg',
+                image: 'images/grouper-fresh.jpg',
                 features: ['Gulf varieties', 'Skinless fillets', 'Restaurant cuts'],
                 category: 'Fresh Fish'
             }
@@ -2522,9 +2560,9 @@ function initializeDynamicNavbar() {
         { selector: '.products-cta', theme: 'theme-light' },
         
         // Home Page Sections
-        { selector: '.hero', theme: 'theme-dark' },         // Blue-coral gradient background → dark navbar for contrast
+        { selector: '.hero', theme: 'theme-transparent' },  // Video background → transparent navbar
         { selector: '.story', theme: 'theme-light' },       // White background → light navbar
-        { selector: '.sourcing', theme: 'theme-light' },    // White background → light navbar
+        { selector: '.sourcing', theme: 'theme-dark' },     // Teal blue background → dark navbar matching bg color
         { selector: '.products-showcase', theme: 'theme-light' }, // White background → light navbar
         { selector: '.our-brands', theme: 'theme-light' },  // Light gray background → light navbar
         { selector: '.facility-showcase', theme: 'theme-light' },
@@ -2590,7 +2628,7 @@ function initializeDynamicNavbar() {
         if (newTheme !== currentTheme) {
             console.log('Changing navbar theme from', currentTheme, 'to', newTheme);
             // Remove all theme classes
-            navbar.classList.remove('theme-light', 'theme-dark', 'theme-seafood', 'theme-coral', 'theme-black');
+            navbar.classList.remove('theme-light', 'theme-dark', 'theme-seafood', 'theme-coral', 'theme-black', 'theme-transparent');
             // Add new theme
             navbar.classList.add(newTheme);
             currentTheme = newTheme;
@@ -2600,7 +2638,7 @@ function initializeDynamicNavbar() {
     // Use Intersection Observer for better performance
     const observerOptions = {
         root: null,
-        rootMargin: '-20px 0px -70% 0px', // Even faster detection for responsive theme changes
+        rootMargin: '-100px 0px -50% 0px', // Delay detection so navbar stays dark longer in hero
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5] // Multiple thresholds for smoother detection
     };
     
@@ -2858,26 +2896,50 @@ function initializeQualityCardDeck() {
     
     // Touchpad/Trackpad wheel scrolling - Horizontal only, no browser navigation
     const wheelThreshold = 30; // Threshold for detection
-    
+
     cardDeck.addEventListener('wheel', (e) => {
         // Only handle if horizontal movement is significant AND stronger than vertical
         if (Math.abs(e.deltaX) > wheelThreshold && Math.abs(e.deltaX) > Math.abs(e.deltaY) && !isAnimating) {
             e.preventDefault(); // Prevent browser navigation
             e.stopPropagation(); // Stop event bubbling
-            
+
             if (e.deltaX > 0) {
                 // Swiping left on trackpad (deltaX positive) = show next card (right)
                 if (currentCard < cards.length - 1) {
                     showCard(currentCard + 1);
                 }
             } else if (e.deltaX < 0) {
-                // Swiping right on trackpad (deltaX negative) = show previous card (left)  
+                // Swiping right on trackpad (deltaX negative) = show previous card (left)
                 if (currentCard > 0) {
                     showCard(currentCard - 1);
                 }
             }
         }
     }, { passive: false });
+
+    // Arrow button navigation
+    const arrowPrev = document.getElementById('qualityArrowPrev');
+    const arrowNext = document.getElementById('qualityArrowNext');
+
+    if (arrowPrev) {
+        arrowPrev.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (currentCard > 0 && !isAnimating) {
+                showCard(currentCard - 1);
+            }
+        });
+    }
+
+    if (arrowNext) {
+        arrowNext.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (currentCard < cards.length - 1 && !isAnimating) {
+                showCard(currentCard + 1);
+            }
+        });
+    }
 }
 
 // Initialize dynamic navbar on all pages
@@ -3406,6 +3468,8 @@ function initializeAwesomeMap() {
         awesomeMap = L.map('awesome-sourcing-map', {
             center: [20, 0],
             zoom: 2,
+            minZoom: 2,
+            maxZoom: 6,
             zoomControl: true,
             attributionControl: false,
             preferCanvas: true
@@ -3580,6 +3644,8 @@ function showNewSourcingMap() {
     const map = L.map('sourcing-map', {
         center: [20, -30],
         zoom: 2,
+            minZoom: 2,
+            maxZoom: 6,
         zoomControl: true
     });
     
@@ -3722,47 +3788,40 @@ function showMapAfterAnimation() {
 }
 
 // CLEAN EARTH ANIMATION SEQUENCE
-function initializeEarthAnimation() {
-    console.log('🌍 Setting up earth animation sequence...');
-    
-    const earthClickable = document.getElementById('earth-clickable');
+function initializeWelcomeAndMap() {
+    console.log('🗺️ Setting up welcome message and map sequence...');
+
     const welcomeMessage = document.getElementById('welcome-message');
     const finalMap = document.getElementById('final-map');
-    
-    if (!earthClickable || !welcomeMessage || !finalMap) {
-        console.error('❌ Missing animation elements');
+
+    if (!welcomeMessage || !finalMap) {
+        console.error('❌ Missing welcome message or map elements');
         return;
     }
-    
-    // Auto-trigger animation after page loads (3 seconds delay)
+
+    // Auto-start welcome message and map sequence after page loads (2 seconds delay)
     setTimeout(() => {
-        console.log('🌍 Auto-starting earth animation sequence...');
-        startAnimationSequence();
-    }, 3000);
+        console.log('✨ Starting welcome message animation...');
+        startWelcomeAndMapSequence();
+    }, 2000);
 }
 
-function startAnimationSequence() {
-    const earthClickable = document.getElementById('earth-clickable');
+function startWelcomeAndMapSequence() {
     const welcomeMessage = document.getElementById('welcome-message');
     const finalMap = document.getElementById('final-map');
-    
-    // Step 1: Start earth zoom animation (2 seconds)
-    earthClickable.classList.add('zooming');
-    
-    // Step 2: Show welcome message after earth zoom (1.5 seconds delay)
-    setTimeout(() => {
-        welcomeMessage.style.display = 'block';
-        welcomeMessage.classList.add('show');
-        animateWelcomeWords();
-    }, 1500);
-    
-    // Step 3: Show map right after welcome message completes (4 seconds total)
+
+    // Step 1: Show welcome message immediately and animate it
+    welcomeMessage.style.display = 'block';
+    welcomeMessage.classList.add('show');
+    animateWelcomeWords();
+
+    // Step 2: Show map after welcome message completes (3 seconds total)
     setTimeout(() => {
         welcomeMessage.style.display = 'none';
         finalMap.style.display = 'block';
         finalMap.classList.add('show');
         createFinalMap();
-    }, 4200); // 1.5s + 2.7s for word animation = 4.2s
+    }, 3000); // 3 seconds for word animation
 }
 
 function animateWelcomeWords() {
@@ -3787,15 +3846,41 @@ function createFinalMap() {
         const map = L.map('final-map', {
             center: [20, 0],
             zoom: 2,
+            minZoom: 2,
+            maxZoom: 6,
             zoomControl: true,
             scrollWheelZoom: true
         });
         
         // Store map reference globally for focusing
         window.finalMap = map;
-        
-        // Add beautiful tiles
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+
+        // Add scroll listener to close tooltips when scrolling away from map
+        let closeTooltipsOnScroll = () => {
+            const mapSection = document.querySelector('.sourcing');
+            if (mapSection) {
+                const rect = mapSection.getBoundingClientRect();
+                // Check if map section is out of view
+                if (rect.bottom < 0 || rect.top > window.innerHeight) {
+                    // Close all custom tooltips
+                    document.querySelectorAll('.stable-custom-tooltip').forEach(tooltip => {
+                        tooltip.style.display = 'none';
+                    });
+
+                    // Reset all markers' permanent states
+                    map.eachLayer(function(layer) {
+                        if (layer.setTooltipPermanent) {
+                            layer.setTooltipPermanent(false);
+                        }
+                    });
+                }
+            }
+        };
+
+        window.addEventListener('scroll', closeTooltipsOnScroll);
+
+        // Add map tiles with dark blue ocean and country names
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
             attribution: '© OpenStreetMap © CartoDB',
             maxZoom: 19
         }).addTo(map);
@@ -3828,14 +3913,17 @@ function createFinalMap() {
         });
         
         locations.forEach((location, index) => {
-            // Create enhanced orange marker
-            const marker = L.circleMarker([location.lat, location.lng], {
-                radius: 8,
-                fillColor: '#ff6b47',
-                color: '#fff',
-                weight: 2,
-                opacity: 1,
-                fillOpacity: 0.8
+            // Create professional minimalist marker
+            const markerIcon = L.divIcon({
+                className: 'custom-pin-marker',
+                html: '<div class="pin-marker"></div>',
+                iconSize: [22, 22],
+                iconAnchor: [11, 11],
+                popupAnchor: [0, -11]
+            });
+
+            const marker = L.marker([location.lat, location.lng], {
+                icon: markerIcon
             }).addTo(map);
             
             // Create popup content based on specific product
@@ -4208,12 +4296,12 @@ function closePremiumPopup() {
     document.removeEventListener('keydown', handleEscapeKey);
 }
 
-// EARTH ANIMATION INITIALIZATION
+// WELCOME MESSAGE AND MAP INITIALIZATION
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🌍 DOM loaded - initializing earth animation...');
+    console.log('🗺️ DOM loaded - initializing welcome message and map...');
     
-    // Initialize the earth animation sequence
-    initializeEarthAnimation();
+    // Initialize the welcome message and map sequence
+    initializeWelcomeAndMap();
     
     // Keep the existing map initialization for other parts of the site
     if (typeof populateSourcingStats === 'function') {
@@ -4435,5 +4523,40 @@ function initializeSourcingMap() {
     } catch (error) {
         console.error('❌ Error creating map:', error);
     }
+}
+
+
+// Seamless video loop effect for hero video
+function initializeSeamlessVideoLoop() {
+    const heroVideo = document.querySelector('.hero-background-video');
+    
+    if (!heroVideo) return;
+    
+    // Add smooth fade transition before loop restarts
+    heroVideo.addEventListener('timeupdate', function() {
+        const duration = heroVideo.duration;
+        const currentTime = heroVideo.currentTime;
+        
+        // Trigger fade 0.5 seconds before video ends
+        if (duration - currentTime <= 0.5 && duration - currentTime > 0.4) {
+            heroVideo.classList.add('fade-transition');
+        } else if (currentTime < 0.5) {
+            // Remove fade at the start of the video
+            heroVideo.classList.remove('fade-transition');
+        }
+    });
+    
+    // Ensure video plays on iOS
+    heroVideo.muted = true;
+    heroVideo.play().catch(err => {
+        console.log('Video autoplay prevented:', err);
+    });
+}
+
+// Initialize on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSeamlessVideoLoop);
+} else {
+    initializeSeamlessVideoLoop();
 }
 

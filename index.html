@@ -31,22 +31,29 @@
     </nav>
 
     <main>
-        <!-- Clean Hero Section -->
-        <section class="hero-clean" id="home">
+        <!-- Hero Section with Video -->
+        <section class="hero-clean hero-video-section" id="home">
+            <video class="hero-background-video" autoplay muted loop playsinline preload="auto" webkit-playsinline x5-playsinline>
+                <source src="videos/hero-video-ultra-quality.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div class="hero-video-overlay"></div>
+
             <div class="hero-container">
                 <div class="hero-content">
                     <h1 class="hero-title">
                         Premium Quality Seafood
                     </h1>
-                    
+
                     <p class="hero-subtitle">
                         For Restaurant & Retail Industry
                     </p>
-                    
+
                     <div class="hero-legacy">
                         <span class="legacy-text">Family owned since 1974 • 3rd largest shrimp importer in USA</span>
                     </div>
-                    
+
                     <button class="hero-cta" onclick="scrollToSection('about')">
                         Discover Our Story
                     </button>
@@ -172,6 +179,18 @@
                     <div class="quality-swipe-hint">
                         Click or swipe
                     </div>
+
+                    <!-- Navigation Arrows -->
+                    <button class="quality-arrow quality-arrow-left" id="qualityArrowPrev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="quality-arrow quality-arrow-right" id="qualityArrowNext">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
@@ -183,23 +202,26 @@
                 <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">We source from the world's finest fishing fleets and farmers across 5+ countries</p>
                 
                 <div class="sourcing-content">
-                    <!-- CLEAN EARTH ANIMATION SEQUENCE -->
-                    <div class="earth-animation-container" data-aos="fade-up" data-aos-delay="400">
-                        <!-- Clickable Earth -->
-                        <div id="earth-clickable" class="earth-clickable">
-                            <img src="images/world-spinning.gif" alt="Spinning World" class="world-gif">
-                        </div>
-                        
-                        <!-- Welcome Message (Hidden) -->
-                        <div id="welcome-message" class="welcome-message" style="display: none;">
+                    <!-- WELCOME MESSAGE AND MAP SEQUENCE -->
+                    <div class="sourcing-animation-container" data-aos="fade-up" data-aos-delay="400">
+                        <!-- Welcome Message -->
+                        <div id="welcome-message" class="welcome-message">
                             <div class="welcome-line">
                                 <span class="letter">W</span><span class="letter">e</span><span class="letter">l</span><span class="letter">c</span><span class="letter">o</span><span class="letter">m</span><span class="letter">e</span><span class="space"> </span><span class="letter">t</span><span class="letter">o</span><span class="space"> </span><span class="letter">o</span><span class="letter">u</span><span class="letter">r</span><span class="space"> </span><span class="letter world-letter">W</span><span class="letter world-letter">o</span><span class="letter world-letter">r</span><span class="letter world-letter">l</span><span class="letter world-letter">d</span><span class="letter world-letter">!</span>
                             </div>
                         </div>
-                        
-                        <!-- Sourcing Map (Hidden) -->
-                        <div id="final-map" class="final-map" style="display: none;">
+
+                        <!-- Sourcing Map -->
+                        <div id="final-map" class="final-map">
                             <!-- Leaflet map will be inserted here -->
+                        </div>
+
+                        <!-- Mobile/Tablet Touch Hint -->
+                        <div class="map-touch-hint">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12h14"/>
+                            </svg>
+                            Use two fingers to move the map
                         </div>
                     </div>
                     
@@ -228,24 +250,6 @@
                 
                 <div class="product-grid" id="product-grid">
                     <!-- Will be populated by JavaScript -->
-                </div>
-                
-                <div class="product-highlights">
-                    <div class="highlight-card" data-aos="fade-up">
-                        <div class="highlight-icon">📊</div>
-                        <h4>Industry Leading</h4>
-                        <p>3rd largest shrimp importer in the USA with $600M annual import value</p>
-                    </div>
-                    <div class="highlight-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="highlight-icon">🌍</div>
-                        <h4>Global Reach</h4>
-                        <p>11,037+ import shipments from trusted suppliers worldwide</p>
-                    </div>
-                    <div class="highlight-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="highlight-icon">❄️</div>
-                        <h4>Cold Chain Excellence</h4>
-                        <p>Refrigerated containers with typical shipments of 18,000-24,000 kg</p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -312,7 +316,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <textarea id="message" name="message" placeholder="Tell us about your seafood needs..." rows="4"></textarea>
+                                <textarea id="message" name="message" placeholder="Tell us about your seafood needs..." rows="2"></textarea>
                             </div>
                             <button type="submit" class="submit-button">Send Message</button>
                         </form>
