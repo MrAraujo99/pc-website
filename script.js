@@ -4529,14 +4529,14 @@ function initializeSourcingMap() {
 // Seamless video loop effect for hero video
 function initializeSeamlessVideoLoop() {
     const heroVideo = document.querySelector('.hero-background-video');
-    
+
     if (!heroVideo) return;
-    
+
     // Add smooth fade transition before loop restarts
     heroVideo.addEventListener('timeupdate', function() {
         const duration = heroVideo.duration;
         const currentTime = heroVideo.currentTime;
-        
+
         // Trigger fade 0.5 seconds before video ends
         if (duration - currentTime <= 0.5 && duration - currentTime > 0.4) {
             heroVideo.classList.add('fade-transition');
@@ -4545,7 +4545,7 @@ function initializeSeamlessVideoLoop() {
             heroVideo.classList.remove('fade-transition');
         }
     });
-    
+
     // Ensure video plays on iOS
     heroVideo.muted = true;
     heroVideo.play().catch(err => {
@@ -4553,10 +4553,54 @@ function initializeSeamlessVideoLoop() {
     });
 }
 
+// Force autoplay for all videos on iOS and mobile devices
+function forceVideoAutoplay() {
+    const allVideos = document.querySelectorAll('video');
+
+    allVideos.forEach(video => {
+        // Ensure critical attributes are set
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        video.setAttribute('x5-playsinline', '');
+
+        // Try to play
+        const playPromise = video.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log('Autoplay prevented for video:', error);
+
+                // Add touch/click handler as fallback
+                const playOnInteraction = () => {
+                    video.play();
+                    document.removeEventListener('touchstart', playOnInteraction);
+                    document.removeEventListener('click', playOnInteraction);
+                };
+
+                document.addEventListener('touchstart', playOnInteraction, { once: true });
+                document.addEventListener('click', playOnInteraction, { once: true });
+            });
+        }
+    });
+}
+
 // Initialize on page load
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeSeamlessVideoLoop);
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeSeamlessVideoLoop();
+        forceVideoAutoplay();
+    });
 } else {
     initializeSeamlessVideoLoop();
+    forceVideoAutoplay();
 }
+
+// Also try to play videos when page becomes visible
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        forceVideoAutoplay();
+    }
+});
 
