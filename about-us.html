@@ -322,10 +322,62 @@
             counters.forEach(counter => observer.observe(counter));
         }
 
+        // Navbar color change based on section background
+        function initializeNavbarColorChange() {
+            const navbar = document.getElementById('navbar');
+
+            const sections = [
+                { element: document.querySelector('.about-hero'), type: 'blue' },
+                { element: document.querySelector('.company-story'), type: 'light' },
+                { element: document.querySelector('.leadership-team'), type: 'light' },
+                { element: document.querySelector('.values-mission'), type: 'light' },
+                { element: document.querySelector('.company-stats'), type: 'dark' },
+                { element: document.querySelector('.about-cta'), type: 'light' }
+            ];
+
+            if (!navbar) return;
+
+            function updateNavbar() {
+                const scrollPosition = window.scrollY + navbar.offsetHeight + 50;
+                let currentSection = null;
+
+                for (let section of sections) {
+                    if (!section.element) continue;
+
+                    const sectionTop = section.element.offsetTop;
+                    const sectionBottom = sectionTop + section.element.offsetHeight;
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSection = section;
+                        break;
+                    }
+                }
+
+                navbar.classList.remove('on-blue', 'on-light', 'on-dark');
+
+                if (currentSection) {
+                    if (currentSection.type === 'blue') {
+                        navbar.classList.add('on-blue');
+                    } else if (currentSection.type === 'light') {
+                        navbar.classList.add('on-light');
+                        navbar.classList.add('scrolled');
+                    } else if (currentSection.type === 'dark') {
+                        navbar.classList.add('on-dark');
+                    }
+                } else {
+                    navbar.classList.add('on-blue');
+                }
+            }
+
+            window.addEventListener('scroll', updateNavbar);
+            updateNavbar();
+        }
+
         // Initialize when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
             initializeCounters();
             initializeWaveInteraction();
+            initializeNavbarColorChange();
         });
     </script>
 </body>

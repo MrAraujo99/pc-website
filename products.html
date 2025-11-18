@@ -639,57 +639,60 @@
         }
 
         /* NAVIGATION FOR PRODUCT SHOWCASE */
+        .showcase-container-enhanced {
+            position: relative;
+        }
+
         .showcase-nav-enhanced {
             position: absolute;
-            bottom: 1.5rem;
-            right: 1.5rem;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
             display: flex;
-            gap: 0.6rem;
-            z-index: 3;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .showcase-nav-enhanced > * {
+            pointer-events: auto;
         }
 
         .showcase-nav-btn {
-            background:
-                linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            display: none;
+        }
+
+        .showcase-nav-arrow {
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: rgba(255, 255, 255, 0.9);
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            font-weight: 600;
-            font-size: 0.8rem;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .showcase-nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(74, 127, 200, 0.2) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        .showcase-nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.15);
+            box-shadow: 0 6px 25px rgba(255, 107, 107, 0.4);
         }
 
-        .showcase-nav-btn:hover,
-        .showcase-nav-btn.active {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.3) 0%, rgba(255, 107, 107, 0.1) 100%);
-            border-color: rgba(255, 107, 107, 0.6);
-            color: #FF6B6B;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow:
-                0 8px 25px rgba(255, 107, 107, 0.3),
-                0 0 20px rgba(255, 107, 107, 0.2);
-        }
-
-        .showcase-nav-btn:hover::before,
-        .showcase-nav-btn.active::before {
-            opacity: 1;
+        .showcase-nav-arrow:active {
+            transform: scale(1.05);
         }
 
         /* CTA SECTION */
@@ -989,19 +992,13 @@
             }
 
             .showcase-nav-enhanced {
-                position: relative;
-                bottom: auto;
-                right: auto;
-                margin-top: 1.5rem;
-                justify-content: center;
-                width: 100%;
-                padding: 0 1.5rem;
-                flex-wrap: wrap;
+                padding: 0 0.5rem;
             }
 
-            .showcase-nav-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.75rem;
+            .showcase-nav-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
 
             /* CTA Section Mobile */
@@ -1315,6 +1312,18 @@
                     description: 'Premium grouper with firm, white meat perfect for various cooking methods',
                     background: 'images/grouper-fresh.jpg',
                     features: ['Firm Texture', 'DNA Tested', 'Premium Quality']
+                },
+                {
+                    title: 'Red Snapper',
+                    description: 'Fresh red snapper with mild, sweet flavor and lean texture',
+                    background: 'images/red-snapper-fresh.jpg',
+                    features: ['Wild Caught', 'Mild Flavor', 'Versatile']
+                },
+                {
+                    title: 'Trout',
+                    description: 'Fresh trout with delicate flavor and tender texture',
+                    background: 'images/trout-fresh.jpg',
+                    features: ['Farm-Raised', 'Omega-3 Rich', 'Delicate Flavor']
                 }
             ],
             ethnic: [
@@ -1364,10 +1373,23 @@
                 `<span class="showcase-feature-tag">${feature}</span>`
             ).join('');
 
-            const navButtons = document.querySelectorAll('.showcase-nav-btn');
-            navButtons.forEach((btn, index) => {
-                btn.classList.toggle('active', index === currentProductIndex);
-                btn.textContent = products[index].title.split(' ')[0] + (products[index].title.split(' ')[1] || '');
+            // Dynamically generate arrow navigation only
+            const navContainer = document.querySelector('.showcase-nav-enhanced');
+            navContainer.innerHTML = `
+                <button class="showcase-nav-arrow" data-direction="prev">←</button>
+                <button class="showcase-nav-arrow" data-direction="next">→</button>
+            `;
+
+            // Arrow navigation
+            navContainer.querySelectorAll('.showcase-nav-arrow').forEach(arrow => {
+                arrow.addEventListener('click', () => {
+                    if (arrow.dataset.direction === 'prev') {
+                        currentProductIndex = (currentProductIndex - 1 + products.length) % products.length;
+                    } else {
+                        currentProductIndex = (currentProductIndex + 1) % products.length;
+                    }
+                    updateShowcase();
+                });
             });
         }
 
@@ -1377,13 +1399,6 @@
                 tab.classList.add('active');
                 currentCategory = tab.dataset.category;
                 currentProductIndex = 0;
-                updateShowcase();
-            });
-        });
-
-        document.querySelectorAll('.showcase-nav-btn').forEach((btn, index) => {
-            btn.addEventListener('click', () => {
-                currentProductIndex = index;
                 updateShowcase();
             });
         });

@@ -808,12 +808,9 @@ function createSourcePopupContent(location, highlightProduct = null) {
     if (highlightProduct === 'Yellowfin Tuna') {
         return `
             <div class="premium-tuna-popup">
-                <div class="premium-header">
-                    <div class="premium-header-background"></div>
+                <div class="premium-header" style="background-image: url('images/tuna-fresh.jpg');">
+                    <div class="premium-header-overlay"></div>
                     <div class="premium-content">
-                        <div class="premium-image-container">
-                            <img src="images/premium-tuna.webp" alt="Premium Tuna" class="premium-tuna-image">
-                        </div>
                         <div class="premium-title-section">
                             <h2 class="premium-title">Premium Tuna</h2>
                             <div class="premium-location">${location.flag} ${location.name} • Country of Origin</div>
@@ -858,12 +855,9 @@ function createSourcePopupContent(location, highlightProduct = null) {
     if (highlightProduct === 'Red Snapper') {
         return `
             <div class="premium-tuna-popup">
-                <div class="premium-header">
-                    <div class="premium-header-background"></div>
+                <div class="premium-header" style="background-image: url('images/red-snapper-fresh.jpg');">
+                    <div class="premium-header-overlay"></div>
                     <div class="premium-content">
-                        <div class="premium-image-container">
-                            <img src="images/red-snapper.webp" alt="Premium Red Snapper" class="premium-tuna-image">
-                        </div>
                         <div class="premium-title-section">
                             <h2 class="premium-title">Premium Red Snapper</h2>
                             <div class="premium-location">${location.flag} ${location.name} • Country of Origin</div>
@@ -908,12 +902,9 @@ function createSourcePopupContent(location, highlightProduct = null) {
     if (highlightProduct === 'Grouper') {
         return `
             <div class="premium-tuna-popup">
-                <div class="premium-header">
-                    <div class="premium-header-background"></div>
+                <div class="premium-header" style="background-image: url('images/grouper-fresh.jpg');">
+                    <div class="premium-header-overlay"></div>
                     <div class="premium-content">
-                        <div class="premium-image-container">
-                            <img src="images/grouper-new.jpg" alt="Premium Grouper" class="premium-tuna-image">
-                        </div>
                         <div class="premium-title-section">
                             <h2 class="premium-title">Premium Grouper</h2>
                             <div class="premium-location">${location.flag} ${location.name} • Country of Origin</div>
@@ -1023,8 +1014,14 @@ function populateSourcingStats() {
     }
     
     sourcingLocations.forEach(location => {
+        // Skip Indonesia completely
+        if (location.name.includes('Indonesia')) {
+            return;
+        }
+
         const statElement = document.createElement('div');
         statElement.className = 'country-stat';
+
         statElement.innerHTML = `
             <div class="country-name">
                 <span class="country-flag">${location.flag}</span>
@@ -2560,7 +2557,8 @@ function initializeDynamicNavbar() {
         { selector: '.products-cta', theme: 'theme-light' },
         
         // Home Page Sections
-        { selector: '.hero', theme: 'theme-transparent' },  // Video background → transparent navbar
+        { selector: '.hero-clean', theme: 'theme-transparent' },  // Video background → transparent navbar
+        { selector: '.hero-video-section', theme: 'theme-transparent' },  // Video background → transparent navbar
         { selector: '.story', theme: 'theme-light' },       // White background → light navbar
         { selector: '.sourcing', theme: 'theme-dark' },     // Teal blue background → dark navbar matching bg color
         { selector: '.products-showcase', theme: 'theme-light' }, // White background → light navbar
@@ -2638,8 +2636,8 @@ function initializeDynamicNavbar() {
     // Use Intersection Observer for better performance
     const observerOptions = {
         root: null,
-        rootMargin: '-100px 0px -50% 0px', // Delay detection so navbar stays dark longer in hero
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5] // Multiple thresholds for smoother detection
+        rootMargin: '-60px 0px -20% 0px', // Detect sections at navbar level
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8] // Multiple thresholds for smoother detection
     };
     
     const observer = new IntersectionObserver((entries) => {
@@ -2675,7 +2673,25 @@ function initializeDynamicNavbar() {
     });
     
     // Remove special mega showcase handling - use regular intersection observer
-    
+
+    // Add scroll listener to handle top of page specifically
+    let scrollTimeout;
+    let isAtTop = window.scrollY < 50;
+
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            const nowAtTop = window.scrollY < 50;
+
+            // Only force update when transitioning to top (from not at top to at top)
+            if (nowAtTop && !isAtTop && sections.length > 0) {
+                updateNavbarTheme(sections[0].theme);
+            }
+
+            isAtTop = nowAtTop;
+        }, 10);
+    });
+
     // Initialize with theme based on first section (likely hero)
     const initialTheme = sections.length > 0 ? sections[0].theme : 'theme-light';
     updateNavbarTheme(initialTheme);
@@ -4561,29 +4577,50 @@ function forceVideoAutoplay() {
         // Ensure critical attributes are set
         video.muted = true;
         video.playsInline = true;
+        video.autoplay = true;
+        video.loop = true;
         video.setAttribute('playsinline', '');
         video.setAttribute('webkit-playsinline', '');
         video.setAttribute('x5-playsinline', '');
+        video.removeAttribute('controls');
 
-        // Try to play
-        const playPromise = video.play();
+        // Attempt to play immediately
+        video.play().catch(error => {
+            console.log('Initial autoplay prevented, will retry on interaction:', error);
+        });
 
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log('Autoplay prevented for video:', error);
+        // Additional iOS-specific handling
+        const playOnInteraction = () => {
+            if (video.paused) {
+                video.play().catch(e => console.log('Play failed:', e));
+            }
+        };
 
-                // Add touch/click handler as fallback
-                const playOnInteraction = () => {
-                    video.play();
-                    document.removeEventListener('touchstart', playOnInteraction);
-                    document.removeEventListener('click', playOnInteraction);
-                };
+        // Try to play on any user interaction
+        document.addEventListener('touchstart', playOnInteraction, { once: true, passive: true });
+        document.addEventListener('click', playOnInteraction, { once: true });
 
-                document.addEventListener('touchstart', playOnInteraction, { once: true });
-                document.addEventListener('click', playOnInteraction, { once: true });
-            });
+        // Also try when video becomes visible
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && video.paused) {
+                        video.play().catch(e => console.log('Play on intersection failed:', e));
+                    }
+                });
+            }, { threshold: 0.5 });
+            observer.observe(video);
         }
     });
+
+    // Retry play after a short delay (helps with iOS)
+    setTimeout(() => {
+        allVideos.forEach(video => {
+            if (video.paused) {
+                video.play().catch(e => console.log('Delayed play failed:', e));
+            }
+        });
+    }, 500);
 }
 
 // Initialize on page load

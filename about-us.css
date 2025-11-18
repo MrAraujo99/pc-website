@@ -25,11 +25,85 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: linear-gradient(135deg, #0a2a5c 0%, #1e4079 25%, #2d5aa0 50%, #3a6bb8 75%, #4a7fc8 100%);
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#navbar.scrolled {
+    background: linear-gradient(135deg, #0a2a5c 0%, #1e4079 25%, #2d5aa0 50%, #3a6bb8 75%, #4a7fc8 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+#navbar.scrolled .logo {
+    color: #ffffff !important;
+}
+
+#navbar.scrolled .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+#navbar.scrolled .mobile-menu-toggle span {
+    background: #ffffff !important;
+}
+
+/* Navbar on light backgrounds (white sections) */
+#navbar.on-light {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-bottom: 1px solid #f0f0f0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+#navbar.on-light .logo {
+    color: #FF6B6B !important;
+}
+
+#navbar.on-light .nav-link {
+    color: #1d1d1f !important;
+}
+
+#navbar.on-light .mobile-menu-toggle span {
+    background: #1d1d1f !important;
+}
+
+/* Navbar on dark backgrounds (black sections) */
+#navbar.on-dark {
+    background: rgba(0, 0, 0, 0.9) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+#navbar.on-dark .logo {
+    color: #ffffff !important;
+}
+
+#navbar.on-dark .nav-link {
+    color: #ffffff !important;
+}
+
+#navbar.on-dark .mobile-menu-toggle span {
+    background: #ffffff !important;
+}
+
+/* Navbar on blue backgrounds (hero section) */
+#navbar.on-blue {
+    background: linear-gradient(135deg, #0a2a5c 0%, #1e4079 25%, #2d5aa0 50%, #3a6bb8 75%, #4a7fc8 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#navbar.on-blue .logo {
+    color: #ffffff !important;
+}
+
+#navbar.on-blue .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+#navbar.on-blue .mobile-menu-toggle span {
+    background: #ffffff !important;
 }
 
 .nav-container {
@@ -39,14 +113,14 @@ body {
     justify-content: center;
     align-items: center;
     padding: 0 2rem;
-    height: 80px;
+    height: 55px;
 }
 
 .logo {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #1d1d1f;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -58,7 +132,7 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: #666;
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
@@ -88,7 +162,7 @@ body {
 .mobile-menu-toggle span {
     width: 25px;
     height: 3px;
-    background: #1d1d1f;
+    background: #ffffff;
     margin: 3px 0;
     transition: 0.3s;
 }
@@ -756,28 +830,47 @@ footer {
         font-size: 2.5rem;
     }
     
+    .timeline-marker {
+        display: none;
+    }
+
     .timeline-item {
-        width: 100%;
+        margin-bottom: 3rem;
+    }
+
+    .timeline-item:nth-child(odd) {
+        width: 44% !important;
         left: 0 !important;
-        padding-left: 3rem !important;
-        padding-right: 1rem !important;
+        padding-right: 1.5rem !important;
+        padding-left: 0 !important;
         text-align: left !important;
     }
-    
-    .timeline-item .timeline-marker {
-        left: -11px !important;
+
+    .timeline-item:nth-child(even) {
+        width: 44% !important;
+        left: 56% !important;
+        padding-left: 1.5rem !important;
+        padding-right: 0 !important;
+        text-align: left !important;
     }
-    
+
     .timeline-date {
-        font-size: 1.5rem;
+        display: none;
     }
-    
+
     .timeline-content {
-        padding: 1.5rem;
+        padding: 1rem;
+        font-size: 0.85rem;
     }
-    
+
     .timeline-content h3 {
-        font-size: 1.3rem;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.8rem;
+        line-height: 1.5;
     }
     
     .team-grid {
